@@ -26,6 +26,8 @@ type T_PreciousStones = keyof typeof E_PreciousStones;
 export default function Select() {
 	const [selectedStone, setSelectedStone] = useState<T_PreciousStones | undefined>(undefined);
 
+	const stones: T_PreciousStones[] = Object.keys(E_PreciousStones) as T_PreciousStones[];
+
 	return (
 		<div className="flex flex-col gap-6">
 			<label htmlFor="stone" className="label">
@@ -38,15 +40,15 @@ export default function Select() {
 				onChange={e => setSelectedStone(e.target.value as T_PreciousStones)}
 			>
 				<option value="">Select a stone</option>
-				{Object.values(E_PreciousStones).map(stone => (
+				{stones.map(stone => (
 					<option key={stone} value={stone}>
-						{stone}
+						{E_PreciousStones[stone]}
 					</option>
 				))}
 			</select>
 			{selectedStone && (
 				<div className="alert alert-info">
-					You have selected <strong>{selectedStone}</strong>.
+					You have selected <strong>{E_PreciousStones[selectedStone]}</strong>.
 				</div>
 			)}
 		</div>
